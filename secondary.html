@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPEA UNHEVAL </title>
+       <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Presentación">
+    <meta name="author" content="Anderson29">    
+    <link rel="shortcut icon" href="favicon.ico">
+    <!-- Style CSS-->
+    <link rel="stylesheet" href="assets/css/theme-3.css">
+    <!-- FontAwesome JS-->
+    <script defer src="assets/fontawesome/js/all.min.js"></script>
+        <!-- Theme CSS -->  
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <img src="assets/images/opea.png" alt="logo" class="logo"><span>Taller Cero</span>
+            <nav>
+                <ul id="menuList">
+                    <li><a href="">TallerCero</a></li>
+                    <li><a href="">Nosotros</a></li>
+                    <li><a href="">Sílabo</a></li>
+                    <li><a href="">Otros</a></li>
+                </ul>
+            </nav>
+            <img src="assets/images/menu.png" alt="menu-icon" class="menu-icon" onclick="togglemenu('')">
+        </div>
+
+        <div class="separte">
+            <div class="inge">
+                <div class="center">
+                    <div class="form-input">
+                      <label for="file-ip-1">Subir Foto Fachera</label>
+                      <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
+                    </div>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="fname" name="firstname" placeholder="Escribe tu nombre..." autocomplete="off">
+                    <input type="submit" id="submit" value="Insertar">
+                </div>
+                <br>
+                <div class="col-75">
+                    <input type="button" id="generate" value="Generar Vaucher" >
+                </div>
+            </div>
+    
+            <div class="row" id="opeaunheval" style="padding: 30px;">
+                <div class="col-1">
+                    <h2>Bienvenido a<br>OPEA UNHEVAL</h2>
+                    <h3 id="nameinput"></h3>
+                    <p>No hay límites para lo que podemos construir.</p>
+                    <p>No hay límites para lo que podemos transformar.</p>
+                    <h4>#TenemosPasión #TallerCero2024</h4>
+                    <button type="button">Taller Cero<img src="assets/images/arrow.png" alt=""> </button>
+                </div>
+                <div class="col-2">
+                    <div  class="controller">
+                        <img id="file-ip-1-preview">
+                    </div>
+                    <div class="color-box"></div>
+                    <div class="add-btn">
+                        <img src="assets/images/opealogo.png" alt="Logo" >
+                        <p><small>OPEA UNHEVAL</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <script src="assets/scripts/pdf/html2canvas.js"></script>
+    <script src="assets/scripts/pdf/html2canvas.min.js"></script>
+
+    <script>
+
+        let place = document.querySelector("#fname");
+
+        let inputSubmit = document.querySelector("#submit");
+
+        let nameinput = document.querySelector("#nameinput");
+
+        inputSubmit.addEventListener("click", () => {
+            nameinput.textContent = place.value;
+        });
+
+        
+
+        let menulist = document.getElementById("menuList");
+
+        let margintop = document.querySelector(".separte")
+
+        menuList.style.maxHeight = "0px";
+
+        function togglemenu() {
+            if(menulist.style.maxHeight == "0px"){
+                menulist.style.maxHeight = "130px";
+                margintop.style.marginTop = "130px";
+                margintop.style.transition = "0.5s";
+            } else {
+                menulist.style.maxHeight = "0px";
+                margintop.style.marginTop = "0px";
+                margintop.style.transition = "0.5s";
+            }
+        }
+
+        function showPreview(event){
+            if(event.target.files.length > 0){
+                let src = URL.createObjectURL(event.target.files[0]);
+                let preview = document.getElementById("file-ip-1-preview");
+                preview.src = src;
+                preview.style.display = "block";
+            }
+        }
+
+        document.getElementById("generate").addEventListener("click", function() {
+                html2canvas(document.querySelector("#opeaunheval")).then(canvas => {
+                    let anchorTag = document.createElement("a");
+                    document.body.appendChild(anchorTag);
+                    anchorTag.download = "opeaunheval.jpg";
+                    anchorTag.href = canvas.toDataURL();
+                    anchorTag.target = '_blank';
+                    anchorTag.click();
+                });
+            
+            
+        });
+    </script>
+
+</body>
+</html>
